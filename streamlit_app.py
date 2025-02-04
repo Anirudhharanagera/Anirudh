@@ -31,7 +31,7 @@ def question_answering(squad_df):
     question = st.text_input("Enter your question:")
     if st.button("Get Answer"):
         inputs = tokenizer(question, selected_context, return_tensors="pt", truncation=True).to(model.device)
-        outputs = model(**inputs**)
+        outputs = model(**inputs)
         start_index = torch.argmax(outputs.start_logits)
         end_index = torch.argmax(outputs.end_logits) + 1
         answer = tokenizer.convert_tokens_to_string(
