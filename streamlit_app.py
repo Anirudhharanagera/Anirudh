@@ -12,13 +12,22 @@ from datasets import load_dataset
 
 def load_squad():
     st.info("Loading SQuAD dataset...")
-    dataset = load_dataset("squad", split="validation[:100]")
-    return pd.DataFrame(dataset)
+    try:
+        dataset = load_dataset("squad", split="validation[:100]")
+        return pd.DataFrame(dataset)
+    except Exception as e:
+        st.error(f"Error loading SQuAD dataset: {e}")
+        return pd.DataFrame()
+
 
 def load_cnn_dailymail():
     st.info("Loading CNN/DailyMail dataset...")
-    dataset = load_dataset("cnn_dailymail", "3.0.0", split="test[:50]")
-    return pd.DataFrame(dataset)
+    try:
+        dataset = load_dataset("cnn_dailymail", "3.0.0", split="test[:50]")
+        return pd.DataFrame(dataset)
+    except Exception as e:
+        st.error(f"Error loading CNN/DailyMail dataset: {e}")
+        return pd.DataFrame()
 
 def question_answering(squad_df):
     st.subheader("Question Answering Task")
